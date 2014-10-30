@@ -58,8 +58,8 @@ module ``about the stock example`` =
     [<Koan>]
     let YouGotTheAnswerCorrect() =
         
-        let getField (x:string, y:int) =
-            x.Split([|','|]).[y]
+        let getField (record:string, column:int) =
+            record.Split([|','|]).[column]
         
         let getMax (xDate:string, xVariance:float) (yDate:string, yVariance:float) =
             if xVariance > yVariance then
