@@ -57,6 +57,26 @@ module ``about the stock example`` =
 
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+        
+        let getField (x:string, y:int) =
+            x.Split([|','|]).[y]
+        
+        let getMax (xDate:string, xVariance:float) (yDate:string, yVariance:float) =
+            if xVariance > yVariance then
+                (xDate, xVariance)
+            else
+                (yDate, yVariance)
+
+        let mutable leading = ("", 0.0)
+
+        let trimmedStockData = stockData.Tail
+            
+        for item in trimmedStockData do
+            let cDate = getField(item, 0)
+            let cVariance = abs(float(getField(item, 1)) - float(getField(item, 4)))
+            let current = (cDate, cVariance)
+            leading <- getMax leading current
+
+        let result = fst leading
         
         AssertEquality "2012-03-13" result
